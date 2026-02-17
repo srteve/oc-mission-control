@@ -1,0 +1,72 @@
+[
+  {
+    "_id": "act_1771233898178_t6w55",
+    "_creationTime": 1771233898178,
+    "type": "web_search",
+    "title": "Searched Brave: mission control dashboard",
+    "description": "Query: mission control Next.js build"
+  },
+  {
+    "_id": "act_1771233898196_6zxns",
+    "_creationTime": 1771233898196,
+    "type": "memory_updated",
+    "title": "Updated MEMORY.md",
+    "description": "Logged Revenue CS Playbook context and session bootstrap"
+  },
+  {
+    "_id": "act_1771233898208_dvr50",
+    "_creationTime": 1771233898208,
+    "type": "message_sent",
+    "title": "Replied to Stephen on Telegram",
+    "description": "Mission Control status update"
+  },
+  {
+    "_id": "act_1771235197984_xmka5",
+    "_creationTime": 1771235197984,
+    "type": "file_write",
+    "title": "Built Mission Control dashboard",
+    "description": "Complete rebuild: HQ, Memory Browser, Sessions, Crons, SSE real-time, ⌘K palette"
+  },
+  {
+    "_id": "act_1771235198007_ylke3",
+    "_creationTime": 1771235198007,
+    "type": "web_search",
+    "title": "Researched agent monitoring tools",
+    "description": "LangSmith, Langfuse, AgentOps — synthesized into PRD"
+  },
+  {
+    "_id": "act_1771235198023_s55fp",
+    "_creationTime": 1771235198023,
+    "type": "document_created",
+    "title": "Created Mission Control PRD",
+    "description": "P0-P2 feature prioritization, stack decisions, anti-features defined"
+  },
+  {
+    "_id": "act_1771263144560_fslmg",
+    "_creationTime": 1771263144560,
+    "type": "web_search",
+    "title": "Diagnosed Mission Control activity logging",
+    "description": "Traced SSE stream → activities.json → no POST calls being made from Quinn sessions"
+  },
+  {
+    "_id": "act_1771263144577_yave6",
+    "_creationTime": 1771263144577,
+    "type": "file_read",
+    "title": "Investigated Mission Control codebase",
+    "description": "Reviewed store.ts, log-activity route, SSE stream — identified root cause"
+  },
+  {
+    "_id": "act_1771263155169_qz6g8",
+    "_creationTime": 1771263155169,
+    "type": "file_write",
+    "title": "Updated TOOLS.md with activity logging instructions",
+    "description": "Added Mission Control logging habit — endpoint, types, curl example"
+  },
+  {
+    "_id": "act_1771361676039_pvw51",
+    "_creationTime": 1771361676039,
+    "type": "document_created",
+    "title": "AI Agent Income Plan doc created",
+    "description": "Synthesised JohnnyTube OpenClaw video into 3-play income plan Google Doc"
+  }
+]
