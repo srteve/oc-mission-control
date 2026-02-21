@@ -10,6 +10,7 @@ const profiles = [
     role: "Admin (Front Door)",
     icon: <Shield size={16} className="text-emerald-400" />,
     purpose: "Triage + structuring only. Converts messy inputs into Brief Cards and routes to the right agent.",
+    when: "Messy input, unclear task, or mis‑scoped request.",
     model: "Default (manager)",
     temperature: "0.3–0.4",
     budget: "400–800 tokens",
@@ -25,6 +26,7 @@ const profiles = [
     role: "Writer",
     icon: <PenTool size={16} className="text-indigo-400" />,
     purpose: "Narrative clarity. Produces docs, PRDs, scripts, and long‑form writing.",
+    when: "You need a clear narrative, doc, or executive‑ready copy.",
     model: "Default (writer)",
     temperature: "0.4–0.6",
     budget: "900–1500 tokens (1500–3000 only on explicit long‑form)",
@@ -36,6 +38,7 @@ const profiles = [
     role: "Marketer",
     icon: <Target size={16} className="text-amber-400" />,
     purpose: "Positioning, messaging architecture, and GTM logic anchored to market truth.",
+    when: "You need positioning, ICP clarity, or GTM structure.",
     model: "Default (marketer)",
     temperature: "0.4–0.6",
     budget: "900–1500 tokens",
@@ -47,6 +50,7 @@ const profiles = [
     role: "Developer",
     icon: <Wrench size={16} className="text-sky-400" />,
     purpose: "Implementation, debugging, and automation when explicitly requested.",
+    when: "You need code, fixes, or a safe automation plan.",
     model: "Default (developer)",
     temperature: "0.2–0.4",
     budget: "1200–2200 tokens",
@@ -58,6 +62,7 @@ const profiles = [
     role: "Sales",
     icon: <Gavel size={16} className="text-rose-400" />,
     purpose: "Sequences, qualification, objections, call structure, and close plans.",
+    when: "You need pipeline motion or deal‑level execution.",
     model: "Default (sales)",
     temperature: "0.4–0.6",
     budget: "700–1200 tokens",
@@ -69,6 +74,7 @@ const profiles = [
     role: "Designer",
     icon: <Palette size={16} className="text-purple-400" />,
     purpose: "Information architecture, layout hierarchy, interaction specs.",
+    when: "You need structure before visual design or build.",
     model: "Default (designer)",
     temperature: "0.3–0.5",
     budget: "700–1200 tokens",
@@ -141,6 +147,7 @@ export default function TeamContent() {
               <span className="text-[10px] px-2 py-1 rounded-full bg-gray-800 text-gray-400">{p.budget}</span>
             </div>
             <p className="text-xs text-gray-400 mt-3 leading-relaxed">{p.purpose}</p>
+            <p className="text-[11px] text-gray-500 mt-2"><span className="text-gray-400">When to use:</span> {p.when}</p>
 
             <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-gray-500">
               <div>
