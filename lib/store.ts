@@ -44,8 +44,19 @@ export type Idea = {
   tags: string[];
   link?: string;
   owner: string;
+  decision?: string;
   createdAt: number;
   updatedAt: number;
+};
+
+export type Review = {
+  _id: string;
+  ideaId?: string;
+  clarity: number;
+  usefulness: number;
+  doneness: number;
+  notes?: string;
+  createdAt: number;
 };
 
 export const activities = {
@@ -145,6 +156,7 @@ export const ideas = {
       all = all.filter((i) =>
         i.title.toLowerCase().includes(lower) ||
         (i.summary?.toLowerCase().includes(lower) ?? false) ||
+        (i.decision?.toLowerCase().includes(lower) ?? false) ||
         i.tags.some((t) => t.toLowerCase().includes(lower))
       );
     }
@@ -176,5 +188,22 @@ export const ideas = {
     const next = all.filter((t) => t._id !== id);
     writeJSON("ideas.json", next);
     return next.length < all.length;
+  },
+};
+
+export const reviews = {
+  list(): Review[] {
+    return readJSON<Review>("reviews.json").sort((a, b) => b.createdAt - a.createdAt);
+  },
+  add(data: Omit<Review, "_id" | "createdAt">): Review {
+    const all = readJSON<Review>("reviews.json");
+    const entry: Review = {
+      _id: `rev_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` ,
+      createdAt: Date.now(),
+      ...data,
+    };
+    all.push(entry);
+    writeJSON("reviews.json", all);
+    return entry;
   },
 };

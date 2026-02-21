@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { title, summary, status, tags, link, owner } = body;
+    const { title, summary, status, tags, link, owner, decision } = body;
     if (!title) {
       return NextResponse.json({ error: "title is required" }, { status: 400 });
     }
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
       tags: Array.isArray(tags) ? tags : [],
       link,
       owner: owner ?? "Quinn",
+      decision,
     });
     return NextResponse.json(entry);
   } catch (err) {

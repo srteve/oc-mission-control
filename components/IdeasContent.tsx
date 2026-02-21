@@ -7,6 +7,7 @@ type Idea = {
   _id: string;
   title: string;
   summary?: string;
+  decision?: string;
   status: string;
   tags: string[];
   link?: string;
@@ -28,6 +29,7 @@ export default function IdeasContent() {
 
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [decision, setDecision] = useState("");
   const [link, setLink] = useState("");
   const [tags, setTags] = useState("");
   const [newStatus, setNewStatus] = useState<string>(STATUSES[0]);
@@ -52,6 +54,7 @@ export default function IdeasContent() {
     setSummary("");
     setLink("");
     setTags("");
+    setDecision("");
     setNewStatus(STATUSES[0]);
     setNewOwner("Quinn");
     setEditId(null);
@@ -62,6 +65,7 @@ export default function IdeasContent() {
     const payload = {
       title: title.trim(),
       summary: summary.trim() || undefined,
+      decision: decision.trim() || undefined,
       status: newStatus,
       owner: newOwner,
       link: link.trim() || undefined,
@@ -90,6 +94,7 @@ export default function IdeasContent() {
     setEditId(idea._id);
     setTitle(idea.title);
     setSummary(idea.summary ?? "");
+    setDecision(idea.decision ?? "");
     setLink(idea.link ?? "");
     setTags(idea.tags.join(", "));
     setNewStatus(idea.status);
@@ -136,6 +141,12 @@ export default function IdeasContent() {
                 onChange={(e) => setSummary(e.target.value)}
                 placeholder="Summary"
                 className="w-full h-24 bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-sm text-white"
+              />
+              <input
+                value={decision}
+                onChange={(e) => setDecision(e.target.value)}
+                placeholder="Decision supported"
+                className="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 value={link}
@@ -237,6 +248,9 @@ export default function IdeasContent() {
                       <p className="text-sm font-semibold text-white truncate">{idea.title}</p>
                       {idea.summary && (
                         <p className="text-xs text-gray-500 mt-1 line-clamp-2">{idea.summary}</p>
+                      )}
+                      {idea.decision && (
+                        <p className="text-[11px] text-gray-500 mt-1"><span className="text-gray-400">Decision:</span> {idea.decision}</p>
                       )}
                       <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
                         <span className="px-2 py-0.5 rounded-full bg-gray-800 text-gray-300">{idea.status}</span>
