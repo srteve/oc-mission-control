@@ -36,6 +36,18 @@ export type Task = {
   recurringRule?: string;
 };
 
+export type Idea = {
+  _id: string;
+  title: string;
+  summary?: string;
+  status: string;
+  tags: string[];
+  link?: string;
+  owner: string;
+  createdAt: number;
+  updatedAt: number;
+};
+
 export const activities = {
   list(type?: string, limit?: number): Activity[] {
     let all = readJSON<Activity>("activities.json").reverse();
@@ -119,5 +131,50 @@ export const tasks = {
         t.title.toLowerCase().includes(lower) ||
         (t.description?.toLowerCase().includes(lower) ?? false)
     );
+  },
+};
+
+export const ideas = {
+  list(opts?: { status?: string; owner?: string; q?: string }): Idea[] {
+    const { status, owner, q } = opts ?? {};
+    let all = readJSON<Idea>("ideas.json");
+    if (status && status !== "All") all = all.filter((i) => i.status === status);
+    if (owner && owner !== "All") all = all.filter((i) => i.owner === owner);
+    if (q) {
+      const lower = q.toLowerCase();
+      all = all.filter((i) =>
+        i.title.toLowerCase().includes(lower) ||
+        (i.summary?.toLowerCase().includes(lower) ?? false) ||
+        i.tags.some((t) => t.toLowerCase().includes(lower))
+      );
+    }
+    return all.sort((a, b) => b.updatedAt - a.updatedAt);
+  },
+  add(data: Omit<Idea, "_id" | "createdAt" | "updatedAt">): Idea {
+    const all = readJSON<Idea>("ideas.json");
+    const now = Date.now();
+    const entry: Idea = {
+      _id: `idea_${now}_${Math.random().toString(36).slice(2, 7)}`,
+      createdAt: now,
+      updatedAt: now,
+      ...data,
+    };
+    all.push(entry);
+    writeJSON("ideas.json", all);
+    return entry;
+  },
+  update(id: string, patch: Partial<Idea>): Idea | null {
+    const all = readJSON<Idea>("ideas.json");
+    const idx = all.findIndex((t) => t._id === id);
+    if (idx === -1) return null;
+    all[idx] = { ...all[idx], ...patch, updatedAt: Date.now() };
+    writeJSON("ideas.json", all);
+    return all[idx];
+  },
+  remove(id: string): boolean {
+    const all = readJSON<Idea>("ideas.json");
+    const next = all.filter((t) => t._id !== id);
+    writeJSON("ideas.json", next);
+    return next.length < all.length;
   },
 };

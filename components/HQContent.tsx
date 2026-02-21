@@ -217,6 +217,7 @@ export default function HQContent() {
             {[
               { href: "/memory", label: "Memory Browser", desc: "What I know", emoji: "🧠" },
               { href: "/sessions", label: "Sessions", desc: "Conversation history", emoji: "💬" },
+              { href: "/ideas", label: "Ideas", desc: "Build pipeline", emoji: "💡" },
               { href: "/cost", label: "Cost Dashboard", desc: "AI spending", emoji: "💰" },
               { href: "/crons", label: "Cron Monitor", desc: "Active schedules", emoji: "⏰" },
               { href: "/workshop", label: "Workshop", desc: "Send tasks to Quinn", emoji: "🚀" },

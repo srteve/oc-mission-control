@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Calendar, Search, Compass, Brain, MessageSquare, Clock, Home, Rocket, DollarSign, Inbox, Globe, Users } from "lucide-react";
+import { Activity, Calendar, Search, Compass, Brain, MessageSquare, Clock, Home, Rocket, DollarSign, Inbox, Globe, Users, Lightbulb } from "lucide-react";
 import { useState, useEffect } from "react";
 
 function TunnelBadge() {
@@ -27,6 +27,7 @@ const nav = [
   { href: "/memory", label: "Memory", icon: Brain },
   { href: "/sessions", label: "Sessions", icon: MessageSquare },
   { href: "/team", label: "Team", icon: Users },
+  { href: "/ideas", label: "Ideas", icon: Lightbulb },
   { href: "/inbox", label: "Inbox", icon: Inbox },
   { href: "/crons", label: "Cron Monitor", icon: Clock },
   { href: "/workshop", label: "Workshop", icon: Rocket },

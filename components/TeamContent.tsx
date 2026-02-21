@@ -1,5 +1,8 @@
 "use client";
-import { Settings2, Bot, Shield, PenTool, Target, Wrench, Gavel, Palette } from "lucide-react";
+import { Settings2, Bot, Shield, PenTool, Target, Wrench, Gavel, Palette, MessageSquare } from "lucide-react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { formatDistanceToNow } from "@/lib/utils";
 
 const profiles = [
   {
@@ -95,7 +98,23 @@ const protocols = [
   },
 ];
 
+type Session = {
+  id: string; startedAt: number; lastActiveAt: number;
+  messageCount: number; preview: string;
+};
+
 export default function TeamContent() {
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/sessions")
+      .then(r => r.json())
+      .then(setSessions)
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center gap-2 mb-2">
@@ -166,10 +185,36 @@ export default function TeamContent() {
       </div>
 
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">
-        <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-          Live sessions
-        </h3>
-        <p className="text-xs text-gray-500">Session list lives in the Sessions tab.</p>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+            Live sessions
+          </h3>
+          <Link href="/sessions" className="text-xs text-indigo-300 hover:text-indigo-200">Open Sessions</Link>
+        </div>
+
+        {loading ? (
+          <div className="space-y-2">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-12 bg-gray-800/60 rounded-lg animate-pulse" />
+            ))}
+          </div>
+        ) : sessions.length === 0 ? (
+          <div className="text-xs text-gray-500">No sessions yet.</div>
+        ) : (
+          <div className="space-y-2">
+            {sessions.slice(0, 6).map((s) => (
+              <div key={s.id} className="flex items-start gap-3 bg-gray-950 border border-gray-800 rounded-lg p-3">
+                <MessageSquare size={14} className="text-indigo-400 mt-0.5" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs text-gray-300 truncate">{s.preview || "No preview"}</p>
+                  <div className="text-[11px] text-gray-600 mt-1">
+                    Active {formatDistanceToNow(s.lastActiveAt)} · {s.messageCount} msgs
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
